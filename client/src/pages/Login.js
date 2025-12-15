@@ -1,18 +1,27 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import AuthServices from '../services/AuthServices'
+import toast from 'react-hot-toast'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
     try {
       e.preventDefault()
-      alert(`Email: ${email}\nPassword: ${password}`)
+      const data = { email, password }
+      const res = await AuthServices.LoginUser(data)
+      toast.success(res.data.message)
+      console.log(res.data)
+      navigate('/home')
+      localStorage.setItem('todoapp-token', JSON.stringify(res,data))
     } catch (error) {
+      toast.error('Login failed. Please check your credentials.')
       console.log(error)
     }
-    
   }
 
   return (
