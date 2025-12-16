@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import AuthServices from '../services/AuthServices'
+import { getErrorMessage } from '../utils/ErrorMessage'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -18,9 +19,9 @@ const Register = () => {
       toast.success(res.data.message)
       console.log(res.data)
       navigate('/home')
-    } catch (error) {
-      toast.error('Login failed. Please check your credentials.')
-      console.log(error)
+    } catch (err) {
+      toast.error(getErrorMessage(err))
+      console.log(err)
     }
   }
   

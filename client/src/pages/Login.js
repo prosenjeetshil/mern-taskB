@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthServices from '../services/AuthServices'
 import toast from 'react-hot-toast'
+import { getErrorMessage } from '../utils/ErrorMessage'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -18,9 +19,9 @@ const Login = () => {
       console.log(res.data)
       navigate('/home')
       localStorage.setItem('todoapp-token', JSON.stringify(res,data))
-    } catch (error) {
-      toast.error('Login failed. Please check your credentials.')
-      console.log(error)
+    } catch (err) {
+      toast.error(getErrorMessage(err))
+      console.log(err)
     }
   }
 
