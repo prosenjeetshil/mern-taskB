@@ -12,7 +12,7 @@ const createTodoController = async (req, res) => {
         message: "Title and Description are required",
       });
     }
-    const newTodo = new todoModel({ title, description, createdBy });
+    const newTodo = new todoModel({ title, description, createdBy: req.user.id });
     const result = await newTodo.save();
     res.status(201).send({
       success: true,
