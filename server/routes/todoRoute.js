@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 //create todo
 router.post('/create', authMiddleware , createTodoController)
-router.get('/get-all/:userId', authMiddleware , getAllTodosController)
+router.get('/get-all', authMiddleware , getAllTodosController)
 router.put('/update/:todoId', authMiddleware, updateTodoController )
 router.delete('/delete/:todoId', authMiddleware, deleteTodoController )
 

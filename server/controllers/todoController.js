@@ -12,7 +12,11 @@ const createTodoController = async (req, res) => {
         message: "Title and Description are required",
       });
     }
-    const newTodo = new todoModel({ title, description, createdBy: req.user.id });
+    const newTodo = new todoModel({
+      title,
+      description,
+      createdBy: req.user.id,
+    });
     const result = await newTodo.save();
     res.status(201).send({
       success: true,
@@ -31,22 +35,8 @@ const createTodoController = async (req, res) => {
 // get all todos
 const getAllTodosController = async (req, res) => {
   try {
-    // get user id from req.body
-    const { userId } = req.params;
-    if (!userId) {
-      return res.status(404).send({
-        success: false,
-        message: "User ID is required",
-      });
-    }
-    // find todos by user id
+    const userId = req.user.id;
     const todos = await todoModel.find({ createdBy: userId });
-    if (!todos) {
-      return res.status(404).send({
-        success: false,
-        message: "No todos found for this user",
-      });
-    }
 
     res.status(200).send({
       success: true,
@@ -62,6 +52,7 @@ const getAllTodosController = async (req, res) => {
     });
   }
 };
+
 
 // update todo
 const updateTodoController = async (req, res) => {

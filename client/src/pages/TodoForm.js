@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import TodoServices from "../services/TodoServices";
 
 const TodoForm = () => {
@@ -7,27 +7,19 @@ const TodoForm = () => {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { id } = useParams(); // todo id (edit mode)
+  const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const isEditMode = Boolean(id);
+  const existingTodo = location.state?.todo;
 
-  // Optional: fetch existing todo data if editing
   useEffect(() => {
-    if (isEditMode) {
-      fetchTodoById();
+    if (isEditMode && existingTodo) {
+      setTitle(existingTodo.title);
+      setDescription(existingTodo.description);
     }
-  }, [id]);
-
-  const fetchTodoById = async () => {
-    try {
-      // You may already have todo data in TodoList
-      // If not, backend should expose get-single-todo API
-      // For now, assume data is passed via route state OR skip this
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [isEditMode, existingTodo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

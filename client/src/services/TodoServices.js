@@ -5,7 +5,7 @@ const fetchUserToken = JSON.parse(localStorage.getItem("todoapp-token"));
 axios.defaults.headers.common["Authorization"] = `Bearer ${
   fetchUserToken ? fetchUserToken.data && fetchUserToken.data.token : ""
 }`;
-console.log("Stored token:", fetchUserToken.data.token);
+// console.log("Stored token:", fetchUserToken.data.token);
 
 // Create a new todo
 const createTodo = (todoData) => {
@@ -13,7 +13,7 @@ const createTodo = (todoData) => {
 };
 
 const getAllTodos = (userId) => {
-  return axios.get(`/todo/get-all/${userId}`);
+  return axios.get(`/todo/get-all/`);
 };
 
 const updateTodo = (todoId, updatedData) => {

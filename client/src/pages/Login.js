@@ -17,7 +17,7 @@ const Login = () => {
       const res = await AuthServices.LoginUser(data)
       toast.success(res.data.message)
       console.log(res.data)
-      navigate('/home')
+      navigate('/todos')
       localStorage.setItem('todoapp-token', JSON.stringify(res,data))
     } catch (err) {
       toast.error(getErrorMessage(err))
