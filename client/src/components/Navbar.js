@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
@@ -56,6 +56,15 @@ const Navbar = () => {
                   My Tasks
                 </Link>
               </li>
+              <div className="d-flex" role="search">
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Search tasks..."
+                  aria-label="Search"
+                  onChange={(e) => onSearch(e.target.value)}
+                />
+              </div>
               <li className="nav-item">
                 <button
                   className="nav-link"

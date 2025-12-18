@@ -7,6 +7,7 @@ import TodoCard from "../components/TodoCard";
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
@@ -46,26 +47,29 @@ const TodoList = () => {
   };
 
   const handleToggleStatus = async (todo) => {
-  try {
-    const updatedValue = !todo.isCompleted;
+    try {
+      const updatedValue = !todo.isCompleted;
 
-    await TodoServices.updateTodo(todo._id, { isCompleted: updatedValue });
+      await TodoServices.updateTodo(todo._id, { isCompleted: updatedValue });
 
-    setTodos((prev) =>
-      prev.map((t) =>
-        t._id === todo._id ? { ...t, isCompleted: updatedValue } : t
-      )
-    );
-  } catch (error) {
-    console.log("Error updating todo:", error);
-    alert("Failed to update status");
-  }
-};
+      setTodos((prev) =>
+        prev.map((t) =>
+          t._id === todo._id ? { ...t, isCompleted: updatedValue } : t
+        )
+      );
+    } catch (error) {
+      console.log("Error updating todo:", error);
+      alert("Failed to update status");
+    }
+  };
 
+  const filteredTodos = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
-      <Navbar />
+      <Navbar onSearch={(value) => setSearchQuery(value)} />
 
       <div className="container mt-4">
         {/* Header section */}
@@ -89,7 +93,7 @@ const TodoList = () => {
 
         {/* Todo cards */}
         <div className="row">
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <div className="col-md-4 mb-3" key={todo._id}>
               <TodoCard
                 todo={todo}
