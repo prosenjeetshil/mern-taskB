@@ -68,7 +68,7 @@ const updateTodoController = async (req, res) => {
     const updatedTodo = await todoModel.findByIdAndUpdate(
       { _id: todoId },
       { $set: data },
-      { returnOriginal: false }
+      { new: true }
     );
     if (!updatedTodo) {
       return res.status(404).send({

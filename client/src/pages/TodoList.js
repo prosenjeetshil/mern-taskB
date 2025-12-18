@@ -45,6 +45,24 @@ const TodoList = () => {
     }
   };
 
+  const handleToggleStatus = async (todo) => {
+  try {
+    const updatedValue = !todo.isCompleted;
+
+    await TodoServices.updateTodo(todo._id, { isCompleted: updatedValue });
+
+    setTodos((prev) =>
+      prev.map((t) =>
+        t._id === todo._id ? { ...t, isCompleted: updatedValue } : t
+      )
+    );
+  } catch (error) {
+    console.log("Error updating todo:", error);
+    alert("Failed to update status");
+  }
+};
+
+
   return (
     <>
       <Navbar />
@@ -81,6 +99,7 @@ const TodoList = () => {
                   })
                 }
                 onDelete={handleDelete}
+                onToggleStatus={handleToggleStatus}
               />
             </div>
           ))}

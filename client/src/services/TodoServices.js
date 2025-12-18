@@ -19,6 +19,15 @@ const getAllTodos = (userId) => {
 const updateTodo = (todoId, updatedData) => {
   return axios.put(`/todo/update/${todoId}`, updatedData);
 };
+
+const markTodoAsCompleted = (todoId) => {
+  return updateTodo(todoId, { completed: true });
+}
+
+const markTodoAsPending = (todoId) => {
+  return updateTodo(todoId, { completed: false });
+}
+
 const deleteTodo = (todoId) => {
   return axios.delete(`/todo/delete/${todoId}`);
 };
@@ -28,5 +37,7 @@ const TodoServices = {
   getAllTodos,
   updateTodo,
   deleteTodo,
+  markTodoAsCompleted,
+  markTodoAsPending
 };
 export default TodoServices;
