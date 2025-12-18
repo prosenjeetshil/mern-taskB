@@ -1,16 +1,22 @@
 import React from "react";
 
 const TodoCard = ({ todo, onEdit, onDelete, onToggleStatus }) => {
+
+  const formatedDate = new Date(todo.createdAt).toLocaleDateString();
+
   return (
     <div className="card h-100 shadow-sm">
       <div className="card-body d-flex flex-column">
-        <h5 className="card-title">
+        <div>
+          <h5 className="card-title">
+          {todo.title}
           {todo.isCompleted && (
             <i className="fa fa-check-circle text-success me-2"></i>
           )}
-          {todo.title}
         </h5>
-
+        <small className="text-muted">Date: {formatedDate}</small>
+        </div>
+        
         <p className="card-text flex-grow-1">{todo.description}</p>
 
         <div className="d-flex gap-2 mt-2">

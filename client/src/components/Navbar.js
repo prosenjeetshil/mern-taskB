@@ -46,14 +46,14 @@ const Navbar = ({ onSearch }) => {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to="/home"
+                  to="/todos"
                 >
-                  Home
+                  All Tasks
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/todoList">
-                  My Tasks
+                  Pending Tasks
                 </Link>
               </li>
               <div className="d-flex" role="search">

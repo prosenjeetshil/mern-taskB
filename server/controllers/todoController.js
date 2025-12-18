@@ -36,13 +36,33 @@ const createTodoController = async (req, res) => {
 const getAllTodosController = async (req, res) => {
   try {
     const userId = req.user.id;
-    const todos = await todoModel.find({ createdBy: userId });
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 6;
+    const skip = (page - 1) * limit;
+    const search = req.query.search || "";
+
+    const filterQuery = {
+      createdBy: userId,
+      title: { $regex: search, $options: "i" },
+    }
+
+    const totalDocuments = await todoModel.countDocuments(filterQuery);
+
+    const todos = await todoModel.find(filterQuery)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
 
     res.status(200).send({
       success: true,
       message: "Todos fetched successfully",
+      currentPage: page,
+      totalPages: Math.ceil(totalDocuments / limit),
+      totalDocuments,
       todos,
     });
+    
   } catch (error) {
     console.log(error);
     res.status(500).send({

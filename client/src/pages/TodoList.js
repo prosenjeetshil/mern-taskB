@@ -7,21 +7,26 @@ import TodoCard from "../components/TodoCard";
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [limit] = useState(6);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
 
   // Fetch todos when page loads
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [page, searchTerm]);
 
   const fetchTodos = async () => {
     try {
       setLoading(true);
-      const res = await TodoServices.getAllTodos();
+      const res = await TodoServices.getAllTodos(page, limit, searchTerm);
 
       setTodos(res.data.todos || []);
+      setTotalPages(res.data.totalPages);
     } catch (error) {
       console.log("Error fetching todos:", error);
     } finally {
@@ -63,13 +68,18 @@ const TodoList = () => {
     }
   };
 
-  const filteredTodos = todos.filter((todo) =>
-    todo.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // const filteredTodos = todos.filter((todo) =>
+  //   todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
 
   return (
     <>
-      <Navbar onSearch={(value) => setSearchQuery(value)} />
+      <Navbar
+        onSearch={(value) => {
+          setSearchTerm(value);
+          setPage(1);
+        }}
+      />
 
       <div className="container mt-4">
         {/* Header section */}
@@ -91,9 +101,54 @@ const TodoList = () => {
           <p className="text-muted">No todos found.</p>
         )}
 
+        {/* Pagination UI */}
+          <div className="d-flex justify-content-center mt-4">
+            <nav>
+              <ul className="pagination">
+                <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
+                  <button
+                    className="page-link"
+                    onClick={() => setPage(page - 1)}
+                  >
+                    Prev
+                  </button>
+                </li>
+
+                {[...Array(totalPages)].map((_, index) => (
+                  <li
+                    key={index}
+                    className={`page-item ${
+                      page === index + 1 ? "active" : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => setPage(index + 1)}
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                ))}
+
+                <li
+                  className={`page-item ${
+                    page === totalPages ? "disabled" : ""
+                  }`}
+                >
+                  <button
+                    className="page-link"
+                    onClick={() => setPage(page + 1)}
+                  >
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
         {/* Todo cards */}
         <div className="row">
-          {filteredTodos.map((todo) => (
+          {todos.map((todo) => (
             <div className="col-md-4 mb-3" key={todo._id}>
               <TodoCard
                 todo={todo}
@@ -107,6 +162,8 @@ const TodoList = () => {
               />
             </div>
           ))}
+
+          
         </div>
       </div>
     </>

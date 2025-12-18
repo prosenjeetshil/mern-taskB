@@ -12,8 +12,8 @@ const createTodo = (todoData) => {
   return axios.post("/todo/create", todoData);
 };
 
-const getAllTodos = (userId) => {
-  return axios.get(`/todo/get-all/`);
+const getAllTodos = (page, limit, search="") => {
+  return axios.get(`/todo/get-all?page=${page}&limit=${limit}&search=${search}`);
 };
 
 const updateTodo = (todoId, updatedData) => {
