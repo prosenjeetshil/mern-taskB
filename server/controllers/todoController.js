@@ -38,7 +38,7 @@ const getAllTodosController = async (req, res) => {
     const userId = req.user.id;
 
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 6;
+    const limit = parseInt(req.query.limit) || 9;
     const skip = (page - 1) * limit;
     const search = req.query.search || "";
 

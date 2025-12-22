@@ -51,11 +51,11 @@ const Navbar = ({ onSearch }) => {
                   All Tasks
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" to="/todoList">
                   Pending Tasks
                 </Link>
-              </li>
+              </li> */}
               <div className="d-flex" role="search">
                 <input
                   className="form-control me-2"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import TodoServices from "../services/TodoServices";
 import Navbar from "../components/Navbar";
@@ -9,7 +9,7 @@ const TodoList = () => {
   const [loading, setLoading] = useState(false);
   // const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
-  const [limit] = useState(6);
+  const [limit] = useState(9);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
