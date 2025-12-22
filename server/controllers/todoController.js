@@ -12,6 +12,21 @@ const createTodoController = async (req, res) => {
         message: "Title and Description are required",
       });
     }
+
+    if (title.length > 50) {
+      return res.status(400).send({
+        success: false,
+        message: "Title must be less than 50 characters",
+      });
+    }
+
+    if (description.length > 180) {
+      return res.status(400).send({
+        success: false,
+        message: "Description must be less than 180 characters",
+      });
+    }
+
     const newTodo = new todoModel({
       title,
       description,
@@ -45,11 +60,12 @@ const getAllTodosController = async (req, res) => {
     const filterQuery = {
       createdBy: userId,
       title: { $regex: search, $options: "i" },
-    }
+    };
 
     const totalDocuments = await todoModel.countDocuments(filterQuery);
 
-    const todos = await todoModel.find(filterQuery)
+    const todos = await todoModel
+      .find(filterQuery)
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
@@ -62,7 +78,6 @@ const getAllTodosController = async (req, res) => {
       totalDocuments,
       todos,
     });
-    
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -72,7 +87,6 @@ const getAllTodosController = async (req, res) => {
     });
   }
 };
-
 
 // update todo
 const updateTodoController = async (req, res) => {

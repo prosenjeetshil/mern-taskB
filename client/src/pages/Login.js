@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthServices from "../services/AuthServices";
 import toast from "react-hot-toast";
@@ -11,6 +11,13 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("todoapp-token");
+    if (token) {
+      navigate("/todos", { replace: true });
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -18,7 +25,7 @@ const Login = () => {
       const res = await AuthServices.LoginUser(data);
       toast.success(res.data.message);
       console.log(res.data);
-      navigate("/todos");
+      navigate("/todos", { replace: true });
       localStorage.setItem("todoapp-token", JSON.stringify(res, data));
       const fetchUserToken = JSON.parse(localStorage.getItem("todoapp-token"));
       axios.defaults.headers.common["Authorization"] = `Bearer ${

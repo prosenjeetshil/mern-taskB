@@ -29,6 +29,16 @@ const TodoForm = () => {
       return;
     }
 
+    if (title.trim().length > 50) {
+      alert("Max 50 characters allowed in title");
+      return;
+    }
+
+    if (description.trim().length > 180) {
+      alert("Max 180 characters allowed in description");
+      return;
+    }
+
     try {
       setLoading(true);
 
@@ -66,6 +76,7 @@ const TodoForm = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          <small>{title.length}/50</small>
         </div>
 
         <div className="mb-3">
@@ -76,6 +87,8 @@ const TodoForm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          <small>{description.length}/180</small>
+
         </div>
 
         <button className="btn btn-primary" disabled={loading}>
