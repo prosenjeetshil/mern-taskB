@@ -1,0 +1,15 @@
+.landing-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* background-color: #0F172A; */
+}
+
+.landing-image {
+  max-height: 720px;
+  width: auto;
+}
+
+.logo-shift-left {
+  transform: translateX(-30px);
+}

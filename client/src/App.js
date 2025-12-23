@@ -6,10 +6,11 @@ import TodoList from "./pages/TodoList";
 import { Toaster } from "react-hot-toast";
 import TodoForm from "./pages/TodoForm";
 import RequireAuth from "./services/RequireAuth";
+import "../src/App.css"
 
 function App() {
   return (
-    <div>
+    <div className="root">
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
@@ -22,8 +23,22 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/todo/new" element={<TodoForm />} />
-        <Route path="/todo/edit/:id" element={<TodoForm />} />
+        <Route
+          path="/todo/new"
+          element={
+            <RequireAuth>
+              <TodoForm />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/todo/edit/:id"
+          element={
+            <RequireAuth>
+              <TodoForm />
+            </RequireAuth>
+          }
+        />
       </Routes>
       <Toaster />
     </div>

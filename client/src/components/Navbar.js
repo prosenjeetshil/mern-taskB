@@ -7,7 +7,7 @@ const Navbar = ({ onSearch }) => {
 
   const logoutHandler = () => {
     localStorage.removeItem("todoapp-token");
-    navigate("/login");
+    navigate("/");
     toast.success("Logged out successfully");
   };
 

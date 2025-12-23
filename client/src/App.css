@@ -1,0 +1,68 @@
+:root {
+  --bg-main: #0F172A;
+  --bg-card: #111827;
+  --text-primary: #FFFFFF;
+  --text-secondary: #CBD5E1;
+  --accent: #EF4444;
+}
+
+.root {
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1.display-4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.btn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+/* Cards */
+/* .card {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: none;
+} */
+
+/* Inputs */
+/* .form-control {
+  background-color: #020617;
+  color: #ffffff;
+  border: 1px solid #1E293B;
+}
+
+.form-control:focus {
+  background-color: #020617;
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: none;
+} */

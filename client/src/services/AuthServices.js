@@ -1,11 +1,12 @@
 import axios from 'axios'
+import api from './api'
 
 const registerUser = (data) => {
-    return axios.post('/user/register', data)
+    return api.post('/user/register', data)
 }
 
 const LoginUser = (data) => {
-    return axios.post('/user/login', data)
+    return api.post('/user/login', data)
 }
 
 const AuthServices = {

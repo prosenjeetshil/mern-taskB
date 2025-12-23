@@ -1,23 +1,24 @@
 import axios from "axios";
+import api from "./api";
 
 // get user token from local storage
-const fetchUserToken = JSON.parse(localStorage.getItem("todoapp-token"));
-axios.defaults.headers.common["Authorization"] = `Bearer ${
-  fetchUserToken ? fetchUserToken.data && fetchUserToken.data.token : ""
-}`;
+// const fetchUserToken = JSON.parse(localStorage.getItem("todoapp-token"));
+// axios.defaults.headers.common["Authorization"] = `Bearer ${
+//   fetchUserToken ? fetchUserToken.data && fetchUserToken.data.token : ""
+// }`;
 // console.log("Stored token:", fetchUserToken.data.token);
 
 // Create a new todo
 const createTodo = (todoData) => {
-  return axios.post("/todo/create", todoData);
+  return api.post("/todo/create", todoData);
 };
 
 const getAllTodos = (page, limit, search="") => {
-  return axios.get(`/todo/get-all?page=${page}&limit=${limit}&search=${search}`);
+  return api.get(`/todo/get-all?page=${page}&limit=${limit}&search=${search}`);
 };
 
 const updateTodo = (todoId, updatedData) => {
-  return axios.put(`/todo/update/${todoId}`, updatedData);
+  return api.put(`/todo/update/${todoId}`, updatedData);
 };
 
 const markTodoAsCompleted = (todoId) => {
@@ -29,7 +30,7 @@ const markTodoAsPending = (todoId) => {
 }
 
 const deleteTodo = (todoId) => {
-  return axios.delete(`/todo/delete/${todoId}`);
+  return api.delete(`/todo/delete/${todoId}`);
 };
 
 const TodoServices = {
