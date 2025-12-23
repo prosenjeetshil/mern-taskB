@@ -6,9 +6,9 @@ const userModel = require("../models/userModel");
 
 const registerController = async (req, res) => {
 try {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
     //validation
-    if (!username || !email || !password){
+    if (!email || !password){
         return res.status(500).send({
             success: false,
             message: "Please provide all required fields",
@@ -27,7 +27,7 @@ try {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     //register user
-    const newUser = new userModel({username, email, password: hashedPassword});
+    const newUser = new userModel({email, password: hashedPassword});
     await newUser.save();
     res.status(201).send({
         success: true,
@@ -75,7 +75,6 @@ const loginController = async (req, res) => {
             token,
             user: {
                 id: user._id,
-                username: user.username,
                 email: user.email,
             },
         })

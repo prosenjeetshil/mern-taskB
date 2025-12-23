@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Navbar = ({ onSearch }) => {
-  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   const logoutHandler = () => {
@@ -11,15 +10,6 @@ const Navbar = ({ onSearch }) => {
     navigate("/login");
     toast.success("Logged out successfully");
   };
-
-  useEffect(() => {
-    const fetchUserName = JSON.parse(localStorage.getItem("todoapp-token"));
-    console.log(
-      "Fetched User Name:",
-      fetchUserName && fetchUserName.data.user.username
-    );
-    setUserName(fetchUserName && fetchUserName.data.user.username);
-  }, []);
 
   return (
     <div>
@@ -39,7 +29,7 @@ const Navbar = ({ onSearch }) => {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <h4 className="navbar-brand">
               <i className="fa-regular fa-user" /> &nbsp;
-              <i>Welcome</i> {userName}!
+              <i>Welcome!</i>
             </h4>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -51,11 +41,6 @@ const Navbar = ({ onSearch }) => {
                   All Tasks
                 </Link>
               </li>
-              {/* <li className="nav-item">
-                <Link className="nav-link" to="/todoList">
-                  Pending Tasks
-                </Link>
-              </li> */}
               <div className="d-flex" role="search">
                 <input
                   className="form-control me-2"

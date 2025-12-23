@@ -6,7 +6,14 @@ const Landing = () => {
     <div className="container py-5">
       <div className="row align-items-center">
 
-        {/* LEFT TEXT AREA */}
+        <div className="col-md-6 text-center mt-4 mt-md-0">
+          <img
+            className="img-fluid rounded shadow"
+            src={require("../assets/images/todo-landing.jpg")}
+            alt="todo landing"
+          />
+        </div>
+
         <div className="col-md-6">
           <h1 className="fw-bold display-5">
             <span className="text-dark">Lorem ipsum dolor sit</span> <br />
@@ -34,14 +41,7 @@ const Landing = () => {
           </div>
         </div>
 
-        {/* RIGHT IMAGE */}
-        <div className="col-md-6 text-center mt-4 mt-md-0">
-          <img
-            className="img-fluid rounded shadow"
-            src={require("../assets/images/todo-landing.jpg")}
-            alt="todo landing"
-          />
-        </div>
+        
 
       </div>
     </div>

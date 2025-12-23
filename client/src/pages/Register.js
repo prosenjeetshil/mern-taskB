@@ -7,18 +7,17 @@ import { getErrorMessage } from '../utils/ErrorMessage'
 const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [username, setUsername] = useState('')
 
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
-      const data = { username, email, password }
+      const data = { email, password }
       const res = await AuthServices.registerUser(data)
       toast.success(res.data.message)
       console.log(res.data)
-      navigate('/home')
+      navigate('/todos')
     } catch (err) {
       toast.error(getErrorMessage(err))
       console.log(err)
@@ -30,18 +29,6 @@ const Register = () => {
       <div className="card shadow p-4" style={{ width: "380px" }}>
         <div className="text-center mb-3">
           <i className="fa-solid fa-circle-user fa-3x text-primary"></i>
-        </div>
-
-        <div className="mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Username"
-            value={username}
-            onChange={(e)=>{
-              setUsername(e.target.value)
-            }}
-          />
         </div>
 
         <div className="mb-3">
