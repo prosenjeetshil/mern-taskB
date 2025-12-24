@@ -27,8 +27,41 @@ app.use(
 );
 app.use(morgan('dev'));
 
-//routes
+//health check
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "API is running",
+    uptime: process.uptime(),
+    timestamp: new Date(),
+  });
+});
 
+app.get("/health/db", (req, res) => {
+  const dbState = mongoose.connection.readyState;
+
+  /*
+    0 = disconnected
+    1 = connected
+    2 = connecting
+    3 = disconnecting
+  */
+
+  if (dbState === 1) {
+    return res.status(200).json({
+      status: "ok",
+      database: "connected",
+    });
+  }
+
+  return res.status(500).json({
+    status: "error",
+    database: "not connected",
+    state: dbState,
+  });
+});
+
+//routes
 app.use('/api/v1/user', require('./routes/userRoute'));
 app.use('/api/v1/todo', require('./routes/todoRoute'));
 
