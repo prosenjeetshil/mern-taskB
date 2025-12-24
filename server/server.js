@@ -20,7 +20,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://taskb.vercel.app"
+      "https://mern-task-b.vercel.app"
     ],
     credentials: true
   })
