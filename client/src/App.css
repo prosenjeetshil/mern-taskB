@@ -46,14 +46,33 @@ p {
   font-weight: 600;
 }
 
-/* Cards */
-/* .card {
-  background-color: var(--bg-card);
-  color: var(--text-primary);
-  border: none;
+.todos-page .card {
+  background-color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.todos-form .card {
+  background-color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.todo-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+/* .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 } */
 
-/* Inputs */
+
+
 /* .form-control {
   background-color: #020617;
   color: #ffffff;
@@ -66,3 +85,20 @@ p {
   border-color: var(--accent);
   box-shadow: none;
 } */
+
+.todo-form-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0F172A;
+}
+
+.todo-form-card {
+  background: #111827; /* dark card */
+  color: #E5E7EB;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}

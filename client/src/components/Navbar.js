@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const Navbar = ({ onSearch }) => {
+const Navbar = () => {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
@@ -13,50 +13,45 @@ const Navbar = ({ onSearch }) => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg navbar-dark border-bottom px-3">
         <div className="container-fluid">
+          <Link to="/todos">
+            <img
+              src={require("../assets/images/logo-2.png")}
+              alt="taskB logo"
+              height={36}
+              className="ms-5 ps-4"
+            />
+          </Link>
+          
+          {/* Mobile toggle */}
           <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
+            data-bs-target="#navbarToggler"
+            aria-controls="navbarToggler"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <h4 className="navbar-brand">
-              <i className="fa-regular fa-user" /> &nbsp;
-              <i>Welcome!</i>
-            </h4>
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
+          <div className="collapse navbar-collapse" id="navbarToggler">
+            <ul className="navbar-nav ms-auto align-items-center gap-2">
               <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  aria-current="page"
-                  to="/todos"
-                >
+                <Link className="nav-link" to="/todos">
                   All Tasks
                 </Link>
               </li>
-              <div className="d-flex" role="search">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search tasks..."
-                  aria-label="Search"
-                  onChange={(e) => onSearch(e.target.value)}
-                />
-              </div>
+
               <li className="nav-item">
                 <button
-                  className="nav-link"
-                  title="logout"
+                  className="btn btn-sm btn-outline-danger"
                   onClick={logoutHandler}
                 >
-                  <i className="fa-solid fa-right-from-bracket text-danger" />
+                  <i className="fa-solid fa-right-from-bracket me-1"></i>
+                  Logout
                 </button>
               </li>
             </ul>
